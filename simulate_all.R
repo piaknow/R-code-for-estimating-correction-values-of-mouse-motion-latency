@@ -37,7 +37,7 @@ for(x in xsamples:1){ 					#1ピクセルの位置を網羅する 100~1 ここ�
 			datapos = datapos + interval
 			scanstick = data[datapos,2]						#スキャンするセンサーの位置を取得
 			ce = ceiling((x * xgap - scanstick) / pixelgap)
-			fl = floor((x * xgap - scanstick) / pixelgap)
+			fl = ce - 1
 			if(ce < currentpixels){				#今よりも小さいピクセル数が見つかった場合
 				currentpixels = ce			#それを代入する
 				minpixels = ce				#ピクセル数の最小値を更新
