@@ -49,7 +49,7 @@ for(x in xsamples:1){ 					#1ピクセルの位置を網羅する 100~1 ここ�
 
 		#↑スキャンした値がminpixelsより大きくなった時間、すなわちセンサーのカウントが切り返されたタイミングがdataposに残される
 
-		delaytime = data[datapos,1]	#マウスの遅延時間
+		delaytime = datapos - 2001	#マウスの遅延時間
 		delaylist = c(delaylist, delaytime)
 	}
 }
