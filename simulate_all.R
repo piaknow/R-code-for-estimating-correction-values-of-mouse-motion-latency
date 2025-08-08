@@ -16,7 +16,9 @@ interval = 125 * xx[j]			#ポーリング間隔 [us]
 time = -interval+1 		#横はここからスキャンをスタート
 samples = 0 			#mindelay maxdelayを最初に一度だけ代入するためのトリガー
 
-delaylist = c()			#結果を格納するベクトル型変数
+entries = xsamples * interval
+delaylist = numeric(entries)			#結果を格納するベクトル型変数
+index = 1
 
 #このプログラムが出すのは「すべての位置とタイミングにおけるマウスの応答時間の理論値の平均」であるので、補正値として使う場合は結果の値から(ポーリング間隔/2)を引くべき
 #「センサーの位置」はマウスのセンサーが読み取っている表面の位置を指す。
@@ -49,8 +51,8 @@ for(x in xsamples:1){ 					#1ピクセルの位置を網羅する 100~1 ここ�
 
 		#↑スキャンした値がminpixelsより大きくなった時間、すなわちセンサーのカウントが切り返されたタイミングがdataposに残される
 
-		delaytime = datapos - 2001	#マウスの遅延時間
-		delaylist = c(delaylist, delaytime)
+		delaylist[index] = datapos - 2001	#マウスの遅延時間
+		index = index + 1
 	}
 }
 
