@@ -8,7 +8,7 @@ xsamples = 100 			#number of samples in 1 count
 dpi = 1600				#mouse sensitivity
 pixelgap = 25400 / dpi		#distance of 1 count [μm]
 xgap = pixelgap / xsamples 	#sampling gap of x [μm]
-interval = 125 * xx[j]		#sensor read interval [μs] (= mouse output interval)
+interval = 125 * xx[j]		#sensor read interval [μs] (= mouse output interval), max 1000
 time = -interval+1 		#start time of scan
 
 entries = xsamples * interval	#total number of samples
