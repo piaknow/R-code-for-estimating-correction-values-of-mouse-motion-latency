@@ -6,19 +6,19 @@ for(j in 1:4){
 
 xsamples = 100 			#number of samples in 1 count
 dpi = 1600				#mouse sensitivity
-pixelgap = 25400 / dpi		#distance of 1 count [μm]
+pixelgap = 25400 / dpi		#distance of 1 count [μm] (c)
 xgap = pixelgap / xsamples 	#sampling gap of x [μm]
-interval = 125 * xx[j]		#sensor read interval [μs] (= mouse output interval), max 1000
+interval = 125 * xx[j]		#sensor read and mouse output interval [μs] (i_s, i_c), max 1000
 time = -interval+1 		#start time of scan
 
 entries = xsamples * interval	#total number of samples
 delaylist = numeric(entries)	#storage of s_subIn
 index = 1				#index in the storage for substitution
 
-for(x in xsamples:1){ 		#initial condition of x_lastCount (range: 100~1 (1~0.01 count))
+for(x in xsamples:1){ 		#initial condition of x_lastCount (range: x=pixelgap~pixelgap/100)
 
 	#process sensor output
-	for(i in time:0){		#initial condition of t_sLastRead (range: -interval+1~0)
+	for(i in time:0){		#initial condition of t_sLastRead (range: t=-interval+1~0)
 
 		datapos = i + 2001						#data[datapos,1] is now equal to i
 		scanstick = data[datapos,2]					#slider's position at next sensor read
