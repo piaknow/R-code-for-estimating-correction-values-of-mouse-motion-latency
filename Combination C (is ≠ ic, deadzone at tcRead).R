@@ -1,4 +1,4 @@
-data = read.csv("D:/UserFiles/Desktop/Latency Tester 6gou/graph5.csv")
+data = read.csv("D:/UserFiles/Desktop/Latency Tester 6gou/relative mouse position.csv")
 
 xx = c(1,2,4,8)	#output interval multiplier
 
@@ -18,7 +18,7 @@ index = 1						#index in the storage for substitution
 
 datalength = nrow(data)
 sensordata = matrix(nrow = datalength, ncol = 2)	#storage of sum of sensor counts' transition
-sensordata[, 1] = (1-2001):(nrow(data)-2001)		#substitute
+sensordata[, 1] = (1-4001):(nrow(data)-4001)		#substitute
 
 
 for(x in xsamples:1){ 			#initial condition of x_lastCount (range: x=pixelgap~pixelgap/100)
@@ -42,7 +42,7 @@ for(x in xsamples:1){ 			#initial condition of x_lastCount (range: x=pixelgap~pi
 		#process mouse output
 		for(j in time:0){		#initial condition of t_cLastRead (range: t=-pinterval+1~0)
 
-			datapos = j + 2001					#data[datapos,1] is now equal to j
+			datapos = j + 4001					#data[datapos,1] is now equal to j
 			nowmouse = sensordata[datapos,2] 			#sum of counts output by mouse
 			minmouse = nowmouse					#record the minimum to check reversal
 			while(nowmouse <= minmouse + 1){	#scan to check the timing of reversal
@@ -55,7 +55,7 @@ for(x in xsamples:1){ 			#initial condition of x_lastCount (range: x=pixelgap~pi
 
 			#datapos will be the timing of reversal in sum of sensor counts
 
-			delaylist[index] = datapos - 2001			#substitute l_subin
+			delaylist[index] = datapos - 4001			#substitute l_subin
 			index = index + 1						#update index
 		}
 

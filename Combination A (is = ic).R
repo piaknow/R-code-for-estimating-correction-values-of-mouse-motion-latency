@@ -1,4 +1,4 @@
-data = read.csv("D:/UserFiles/Desktop/Latency Tester 6gou/graph5.csv")
+data = read.csv("D:/UserFiles/Desktop/Latency Tester 6gou/relative mouse position.csv")
 
 xx = c(1,2,4,8)	#output interval multiplier
 
@@ -20,7 +20,7 @@ for(x in xsamples:1){ 		#initial condition of x_lastCount (range: x=pixelgap~pix
 	#process sensor output
 	for(i in time:0){		#initial condition of t_sLastRead (range: t=-interval+1~0)
 
-		datapos = i + 2001						#data[datapos,1] is now equal to i
+		datapos = i + 4001						#data[datapos,1] is now equal to i
 		scanstick = data[datapos,2]					#slider's position at next sensor read
 		currentpixels = ceiling((x * xgap - scanstick) / pixelgap)	#sum of sensor counts at scan's start point
 		minpixels = currentpixels					#record the minimum to check reversal
@@ -40,7 +40,7 @@ for(x in xsamples:1){ 		#initial condition of x_lastCount (range: x=pixelgap~pix
 
 		#datapos will be the timing of reversal in sum of sensor counts
 
-		delaylist[index] = datapos - 2001			#substitute l_subin
+		delaylist[index] = datapos - 4001			#substitute l_subin
 		index = index + 1						#update index
 	}
 }
