@@ -1,4 +1,5 @@
-data = read.csv("D:/UserFiles/Desktop/Latency Tester 6gou/relative mouse position.csv")
+data = as.matrix(read.csv("D:/UserFiles/Desktop/Latency Tester 6gou/relative mouse position.csv"))
+data = matrix(data, nrow(data), ncol(data))
 
 xx = c(1,2,4,8)	#output interval multiplier
 
@@ -24,7 +25,7 @@ sensordata[, 1] = (1-4001):(nrow(data)-4001)		#substitute
 for(x in xsamples:1){ 			#initial condition of x_lastCount (range: x=pixelgap~pixelgap/100)
 
 	#process sensor output
-	for(i in 1:interval){		#initial condition of t_sLastRead (range: t=-2000~-2000+interval-1)
+	for(i in 1:interval){		#initial condition of t_sLastRead (range: t=-4000~-4000+interval-1)
 
 		datapos = i 							#start from the beginning 
 		scanstick = data[datapos,2]					#slider's position
@@ -69,14 +70,23 @@ maxdelaytime = max(delaylist)
 #0~interval-1 and 0~pinterval-1, and the average of them is respectively interval/2 - 0.5 and pinterval/2 - 0.5,
 #we should add 0.5 each to the simulation result
 avgdelaytime = mean(delaylist) + 0.5 + 0.5
+var = var(delaylist)
 sd = sqrt(var(delaylist))
+fm = mean((delaylist - mean(delaylist))^4)
 
 cat("sensor read interval: ", interval, "\n")
 cat("mouse output interval: ", pinterval, "\n")
 cat("l_subIn(avg): ", avgdelaytime, "\n")
 cat("min: ", mindelaytime, "\n")
 cat("max: ", maxdelaytime, "\n")
+cat("var: ", var, "\n")
+#cat("4th moment: ", fm, "\n")
+varconf99 = 2.58 * sqrt((fm - var^2) / 1000)
+cat("varconf99: ", varconf99, "\n")
+cat("var99range: ", (var-varconf99),"~", (var+varconf99), "\n")
 cat("sd: ", sd, "\n")
+cat("sd99range: ", sqrt(var-varconf99), "~", sqrt(var+varconf99), "\n")
+
 correction = -(avgdelaytime - interval/2 - pinterval/2)
 cat("-l_subIn+l_add: ", correction, "\n")
 cat("-l_subIn+l_add(rounded): ", floor(correction + 0.5), "\n")
