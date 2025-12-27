@@ -1,4 +1,4 @@
-data = as.matrix(read.csv("D:/UserFiles/Desktop/Latency Tester 6gou/relative mouse position.csv"))
+data = as.matrix(read.csv("D:/UserFiles/Desktop/Latency Tester 6gou/relative mouse position 2.csv"))
 data = matrix(data, nrow(data), ncol(data))
 
 xx = c(1,2,4,8)	#output interval multiplier
